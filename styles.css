@@ -1,0 +1,33 @@
+:root {
+    --light-color: #FFFCF2;  /* A soft, creamy white */
+    --bright-color: #97DBF7;  /* A light, cheerful blue */
+    --dark-color: #4F4458;    /* A deep, sophisticated gray */
+    --shadow-color: rgba(0, 0, 0, 0.2); /* A subtle shadow effect */
+    --tint-color: #FFFCF2;     /* Same as light-color for a soft tint */  
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            var(--dark-color),
+            var(--bright-color));
+    background-repeat: no-repeat;
+    width: 100%;
+    overscroll-behavior: none;
+    font-family: Arial, sans-serif; /* Add a basic font */
+    display: flex;                 /* Center the content  */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome {
+    font-weight: bold;
+    margin-bottom: 15px;  /* A little space between elements */
+}
+
+.credit {
+      font-size: 0.8em;   /* Smaller text for 'From Glitter' */
+}
