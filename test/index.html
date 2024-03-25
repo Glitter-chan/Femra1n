@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dopamine Jailbreak Test</title>
+<title>Dopamine Jailbreak Mockup</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -31,6 +31,16 @@
   .jailbreak-button:hover {
     background-color: #0056b3;
   }
+  .log {
+    margin-top: 20px;
+    color: #333;
+  }
+  .progress {
+    width: 0%;
+    background-color: #0084ff;
+    height: 20px;
+    margin-top: 20px;
+  }
 </style>
 </head>
 <body>
@@ -40,10 +50,140 @@
 </div>
 
 <div class="status">
-  <p>Your device is ready to be jailbroken.</p>
+  <p id="status-text">Your device is ready to be jailbroken.</p>
 </div>
 
-<button class="jailbreak-button">Jailbreak Now</button>
+<button class="jailbreak-button" id="jailbreak-button">Jailbreak</button>
+
+<div class="log" id="log"></div>
+<div id="progress-container" style="display:none;">
+  <div id="progress" class="progress"></div>
+</div>
+
+<script>
+  const jailbreakSteps = [
+    { message: "Initializing Jailbreak Environment", duration: randomDuration() },
+    { message: "Loading BaseBin TrustCache", duration: randomDuration() },
+    { message: "Elevating Privileges", duration: randomDuration() },
+    { message: "Cleaning Up Exploits", duration: randomDuration() },
+    { message: "Building Phys R/W Primitive", duration: randomDuration() },
+    { message: "Patchfinding", duration: randomDuration() },
+    // Exploiting Kernel and Bypassing PAC/PPL will be handled separately due to their unique requirements
+  ];
+
+  function randomDuration() {
+    return Math.floor(Math.random() * (11000 - 4000 + 1)) + 4000; // Between 4 and 11 seconds
+  }
+
+  function updateLog(message) {
+    document.getElementById("log").innerText = message;
+  }
+
+  function updateProgress(percent) {
+    document.getElementById("progress").style.width = percent + "%";
+  }
+
+  function startJailbreakProcess(stepIndex = 0) {
+    if (stepIndex < jailbreakSteps.length) {
+      const step = jailbreakSteps[stepIndex];
+      updateLog(step.message);
+      setTimeout(() => {
+        startJailbreakProcess(stepIndex + 1);
+      }, step.duration);
+    } else {
+      // Handle Exploiting Kernel, Bypassing PAC, and Bypassing PPL here
+      // Placeholder for now
+      exploitKernel();
+    }
+  }
+
+  function exploitKernel() {
+    updateLog("Exploiting Kernel (0%)");
+    let progress = 0;
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        progress += 10; // Increment by 10 for demonstration
+        updateLog(`Exploiting Kernel (${progress}%)`);
+        updateProgress(progress);
+      } else {
+        clearInterval(interval);
+        bypassPAC();
+      }
+    }, 600); // Simulate 6 seconds total, so 600ms updates
+  }
+
+  // Placeholder for bypassPAC function, to be implemented
+function bypassPAC() {
+    updateLog("Bypassing PAC (0%)");
+    let progress = 0;
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        progress += 100 / 6; // Simulate 6 seconds total, update to reach 100% in that time
+        updateLog(`Bypassing PAC (${Math.round(progress)}%)`);
+        updateProgress(progress);
+      } else {
+        clearInterval(interval);
+        bypassPPL();
+      }
+    }, 1000); // Update every second
+  }
+
+function bypassPPL() {
+    updateLog("Bypassing PPL (0%)");
+    let progress = 0;
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        progress += 100 / 9; // Simulate 9 seconds total, update to reach 100% in that time
+        updateLog(`Bypassing PPL (${Math.round(progress)}%)`);
+        updateProgress(progress);
+      } else {
+        clearInterval(interval);
+        finishJailbreak();
+      }
+    }, 1000); // Update every second
+  }
+
+function finishJailbreak() {
+    updateLog("Rebooting Userspace");
+    setTimeout(() => {
+      // Check for any errors (for mockup purposes, assume success)
+      const success = true; // This would be determined by the actual process outcomes
+      if (success) {
+        document.getElementById("status-text").innerText = "Your device has been jailbroken successfully.";
+        document.getElementById("jailbreak-button").innerText = "Jailbroken";
+        document.getElementById("jailbreak-button").disabled = true;
+        updateLog("Jailbreak Successful!");
+        document.getElementById("progress-container").style.display = "none"; // Hide progress bar
+      } else {
+        updateLog("Error during jailbreak. Please try again.");
+      }
+    }, 2000); // Simulate the reboot process taking 2 seconds
+  }
+
+  document.getElementById("jailbreak-button").onclick = () => {
+    // Ensure the jailbreak can only be initiated if supported
+    if (!isJailbreakSupported()) {
+      updateLog("Unsupported device or iOS version.");
+      return;
+    }
+    document.getElementById("progress-container").style.display = "block";
+    startJailbreakProcess();
+  };
+
+  function isJailbreakSupported() {
+    // Simplified check for demonstration purposes
+    const userAgent = navigator.userAgent;
+    const isIphone = /iPhone/.test(userAgent);
+    // Mock logic for version check, in real scenario would need more sophisticated check
+    const mockIOSVersion = "17.3"; // Placeholder for demonstration
+    return isIphone && parseFloat(mockIOSVersion) <= 17.3;
+  }
+
+  document.getElementById("jailbreak-button").onclick = () => {
+    document.getElementById("progress-container").style.display = "block";
+    startJailbreakProcess();
+  };
+</script>
 
 </body>
 </html>
