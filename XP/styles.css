@@ -1,0 +1,34 @@
+/* styles.css */
+body {
+    font-family: 'MS Sans Serif', Geneva, sans-serif; /* Win98 font */
+    background-color: #C0C0C0; /* Subtle gray background */
+    margin: 20px; 
+}
+
+h1 {
+    color: #000080; /* Dark blue title */
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    border: 1px solid #808080; /* Thin gray border */
+    background-color: #E0E0E0; /* Light item background */
+} 
+
+li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #D0D0D0;
+}
+
+li:hover {
+    background-color: #000080; /* Highlight on hover */
+    color: white;
+}
+
+li a {
+    color: #000080; /* Blue links */
+    text-decoration: none;
+}
